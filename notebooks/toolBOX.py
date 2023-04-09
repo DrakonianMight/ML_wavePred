@@ -42,7 +42,7 @@ def get_waveDB_xday_obs(dbpath = 'F:/SWAN/wave_obs.db', days = 7):
     wb_data = pd.read_sql_query("SELECT * FROM wave_obs WHERE DateTime > (SELECT DATETIME('now', '-"+str(days)+" day'))", conn)
     conn.close()
     
-    wb_data.index = pd.to_datetime(wb_data.DateTime)
+    wb_data.index = pd.to_datetime(wb_data.DateTime, format='ISO8601')
     wb_data = wb_data.sort_index()
     
     return wb_data
